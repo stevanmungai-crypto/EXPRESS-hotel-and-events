@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express Hotel and Events | Premium Restaurant, Lounge & Event Services</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Experience authentic African hospitality with premium restaurant, lounge, and event services at Express Hotel and Events in Nyandarua, Kenya.">
+    <meta name="keywords" content="African restaurant, Kenyan cuisine, Nyandarua hotel, event catering, lounge, conference facilities, Nyama Choma, wedding venue Kenya">
+    <meta name="author" content="Express Hotel and Events">
+    <meta property="og:title" content="Express Hotel and Events | Authentic African Hospitality">
+    <meta property="og:description" content="Premium restaurant, lounge and event services in Nyandarua, Kenya">
+    <meta property="og:image" content="https://i.ibb.co/Z1gnYf0V/logo-express.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://expresshotelafrica.com">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Hotel",
+        "name": "Express Hotel and Events",
+        "description": "Premium restaurant, lounge and event services with authentic African hospitality in Nyandarua, Kenya",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Ol Kalou-Nyahururu Road",
+            "addressLocality": "Nyandarua",
+            "addressCountry": "Kenya",
+            "postalCode": "20303"
+        },
+        "telephone": "+254718770846",
+        "email": "worldclassexpresseventsandcate@gmail.com",
+        "image": "https://i.ibb.co/Z1gnYf0V/logo-express.jpg"
+    }
+    </script>
+    
+    <!-- Fonts & Icons (CDN) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ========== COMPLETE STYLES (same as before) ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            overflow-x: hidden;
+        }
+        :root {
+            --orange: #FF6600;
+            --orange-dark: #CC5500;
+            --orange-light: #FF9966;
+            --white: #FFFFFF;
+            --black: #000000;
+            --gray: #666666;
+            --light-gray: #F8F8F8;
+            --dark-gray: #333333;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Merger accents mapped to Orange Theme */
+            --org: #FF6600;
+            --grn: #FFA000;
+            --red: #E64A19;
+            --gld: #FFB800;
+            --bg-gray: #F5F5F5;
+            --offwh: #FFF9F4;
+            --muted: #666;
+            --serif: 'Montserrat', sans-serif;
+            --sans: 'Poppins', sans-serif;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        section {
+            padding: 24px 0;
+            scroll-margin-top: 55px;
+        }
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--orange);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 9999;
+        }
+        .skip-to-content:focus { top: 0; }
+        
+        /* Header */
+        header {
+            background: rgba(255, 102, 0, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 8px 0;
+            transition: var(--transition);
+        }
+        header.scrolled {
+            padding: 4px 0;
+            background: rgba(204, 85, 0, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        header.scrolled .logo-img {
+            height: 36px;
+        }
+        header.scrolled .logo-text h1 {
+            font-size: 1.15rem;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--white);
+        }
+        .logo-img {
+            height: 44px;
+            width: auto;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.25);
+            transition: var(--transition);
+        }
+        .logo-text h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            transition: var(--transition);
+        }
+        .logo-tagline {
+            font-size: 0.72rem;
+            opacity: 0.9;
+        }
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 16px;
+            align-items: center;
+        }
+        .main-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .main-nav a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--white);
+            transition: width 0.3s;
+        }
+        .main-nav a:hover::after { width: 100%; }
+        .main-nav a.btn-book {
+            background: var(--white);
+            color: var(--orange) !important;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 1.5px solid transparent;
+            transition: var(--transition);
+        }
+        .main-nav a.btn-book:hover {
+            background: transparent;
+            color: var(--white) !important;
+            border-color: var(--white);
+            box-shadow: none;
+        }
+        .main-nav a.btn-book::after {
+            display: none !important;
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(255,102,0,0.25)), url('https://i.ibb.co/JRP2H37J/Express-pic.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+            padding: clamp(100px, 10vh, 120px) 20px clamp(40px, 5vh, 60px);
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: clamp(20px, 4vw, 50px);
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-content {
+            animation: fadeInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .hero-welcome {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+        .hero-welcome .welcome-text {
+            color: var(--orange);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero-welcome .hotel-name {
+            display: block;
+            color: #1FD35F;
+            font-size: 3.3rem;
+            margin-bottom: 2px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.6);
+            font-weight: 800;
+        }
+        .hero-welcome .ampersand-events {
+            display: block;
+            color: #FF6600;
+            font-size: 2.9rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.6);
+            font-weight: 800;
+        }
+        .hero-subtitle {
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+            max-width: 550px;
+            line-height: 1.65;
+            color: rgba(255,255,255,0.92);
+            font-weight: 400;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+        .hero-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+        .highlight-item i {
+            font-size: 1.2rem;
+            color: var(--orange);
+            min-width: 25px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+        
+        /* Info Cards on Right */
+        .hero-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            animation: fadeInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .info-card {
+            border-radius: 16px;
+            padding: 20px;
+            color: white;
+            transition: var(--transition);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+        }
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+        }
+        .card-lounge {
+            background: linear-gradient(135deg, rgba(31, 211, 95, 0.88), rgba(0, 77, 38, 0.94));
+            border: 1px solid rgba(31, 211, 95, 0.35);
+        }
+        .card-events {
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.88), rgba(94, 0, 31, 0.94));
+            border: 1px solid rgba(196, 30, 58, 0.35);
+        }
+        .info-card-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.95;
+        }
+        .info-card-icon {
+            font-size: 0.95rem;
+        }
+        .info-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.2px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .info-card p {
+            font-size: 0.82rem;
+            line-height: 1.45;
+            margin-bottom: 12px;
+            opacity: 0.92;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .card-features {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .feature-tag {
+            background: rgba(255, 255, 255, 0.16);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: #fff;
+        }
+        .feature-tag:hover {
+            background: rgba(255, 255, 255, 0.28);
+            transform: translateY(-1px);
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 2;
+        }
+        @keyframes bounce {
+            0%,100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 35px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255,102,0,0.3);
+        }
+        .btn-primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-3px);
+        }
+        .btn-hero-lounge {
+            background: #1FD35F;
+            color: white;
+            box-shadow: 0 4px 15px rgba(31, 211, 95, 0.35);
+        }
+        .btn-hero-lounge:hover {
+            background: #17b847;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(31, 211, 95, 0.55);
+        }
+        .btn-hero-events {
+            background: #C41E3A;
+            color: white;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.35);
+        }
+        .btn-hero-events:hover {
+            background: #a01729;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(196, 30, 58, 0.55);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        .btn-outline:hover {
+            background: white;
+            color: var(--orange);
+        }
+        
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .section-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--orange);
+            display: inline-block;
+            position: relative;
+        }
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--orange);
+        }
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 12px auto 0;
+        }
+        
+        /* Restaurant & Lounge Layouts */
+        .restaurant-container, .lounge-container, .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            align-items: center;
+        }
+        .lounge-section {
+            background: var(--light-gray);
+        }
+        .lounge-slideshow { order: 2; }
+        .lounge-info { order: 1; }
+        
+        /* Slideshow */
+        .restaurant-slideshow, .lounge-slideshow {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 280px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        .slide.active { opacity: 1; }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slideshow-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 10;
+        }
+        .slideshow-dots { display: flex; gap: 10px; }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+        .dot.active { background: var(--orange); transform: scale(1.2); }
+        .slideshow-btn {
+            background: rgba(255,102,0,0.8);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .slideshow-btn:hover { background: var(--orange); }
+        
+        /* Restaurant Features */
+        .restaurant-features { margin: 12px 0; }
+        .restaurant-feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 8px 12px;
+            background: var(--light-gray);
+            border-radius: var(--radius);
+            margin-bottom: 8px;
+        }
+        .restaurant-feature i { color: var(--orange); font-size: 1.2rem; }
+        
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .service-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .service-card:hover { transform: translateY(-6px); }
+        .service-img { height: 150px; overflow: hidden; }
+        .service-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .service-card:hover .service-img img { transform: scale(1.1); }
+        .service-content { padding: 20px; }
+        .service-icon { font-size: 1.8rem; color: var(--orange); margin-bottom: 12px; }
+        
+        /* Gallery */
+        .gallery-section {
+            background: var(--light-gray);
+        }
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--orange);
+            color: var(--orange);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--orange);
+            color: white;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 280px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .gallery-item:hover { transform: translateY(-5px); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            padding: 20px;
+        }
+        
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox-content { max-width: 90%; max-height: 90%; }
+        .lightbox-img { max-width: 100%; max-height: 80vh; border-radius: var(--radius); }
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .nav-btn {
+            background: rgba(255,102,0,0.8);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            border: none;
+        }
+        
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        .testimonial-card {
+            background: white;
+            padding: 15px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--orange);
+        }
+        .testimonial-rating { color: #FFD700; margin-bottom: 10px; }
+        .testimonial-text { font-style: italic; margin-bottom: 10px; }
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white;
+        }
+        .testimonial-author { display: flex; align-items: center; gap: 15px; }
+        
+        /* Contact */
+        .contact-info { display: flex; flex-direction: column; gap: 30px; }
+        .contact-item {
+            display: flex;
+            gap: 20px;
+            padding: 25px;
+            background: var(--light-gray);
+            border-radius: var(--radius);
+        }
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+        .form-group { margin-bottom: 25px; }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-family: inherit;
+        }
+        .email-routing-info {
+            background: rgba(255,102,0,0.1);
+            padding: 15px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+        }
+        .form-success {
+            background: #4CAF50;
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a1a1a, #000);
+            color: white;
+            padding: 30px 0 20px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-links a {
+            background: rgba(255,255,255,0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: 0.3s;
+        }
+        .social-links a:hover { background: var(--orange); transform: translateY(-3px); }
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--orange), #008040);
+            color: white;
+            font-family: var(--sans);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .map-btn i {
+            font-size: 1.1rem;
+        }
+        .map-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: var(--orange);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            border: none;
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .restaurant-container, .lounge-container, .contact-container {
+                grid-template-columns: 1fr;
+            }
+            .lounge-slideshow { order: 1; }
+            .lounge-info { order: 2; }
+            .hero .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            .hero-welcome {
+                text-align: center;
+            }
+            .hero-welcome .welcome-text,
+            .hero-welcome .hotel-name,
+            .hero-welcome .ampersand-events {
+                text-align: center;
+            }
+            .hero-subtitle {
+                margin: 0 auto 20px;
+                text-align: center;
+            }
+            .hero-highlights {
+                align-items: center;
+            }
+            .hero-actions {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 768px) {
+            /* Prevent horizontal overflow */
+            html, body { overflow-x: hidden; max-width: 100vw; }
+            * { max-width: 100%; }
+            img { max-width: 100% !important; height: auto; }
+            .gallery-item img { height: 100% !important; width: 100% !important; object-fit: cover; }
+
+            section { padding: 30px 0 !important; }
+
+            /* Fix sections using .sec-inner (no container padding) */
+            .sec-inner { padding-left: 16px !important; padding-right: 16px !important; }
+
+            /* Header & Logo: shrink to prevent wrapping */
+            .logo-img { height: 38px !important; width: auto; transition: var(--transition); }
+            header.scrolled .logo-img { height: 32px !important; }
+            .logo-text h1 { font-size: 0.95rem !important; line-height: 1.2; transition: var(--transition); }
+            header.scrolled .logo-text h1 { font-size: 0.88rem !important; }
+            .logo-tagline { display: none !important; }
+            .logo { gap: 8px; }
+            .header-container { padding: 0 10px; }
+
+            /* Nav dropdown: align with smaller header */
+            .main-nav {
+                display: block;
+                position: fixed;
+                top: 54px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+                padding: 0 20px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease, top 0.3s ease;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+                border-bottom: 3px solid var(--orange-light);
+                z-index: 999;
+            }
+            header.scrolled .main-nav {
+                top: 40px;
+            }
+            .main-nav.active {
+                max-height: 400px;
+                padding: 20px;
+            }
+            .main-nav ul {
+                flex-direction: column;
+                gap: 12px;
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                transition-delay: 0.1s;
+            }
+            .main-nav.active ul {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .main-nav ul li a {
+                display: block;
+                padding: 8px 0;
+                font-size: 1.05rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .main-nav ul li:last-child a { border-bottom: none; }
+            .mobile-menu-btn { display: block; }
+
+            /* Hero */
+            .hero { padding: 90px 20px 40px; background-attachment: scroll; min-height: auto; }
+            .hero .container { grid-template-columns: 1fr; gap: 24px; text-align: center; }
+            .hero-welcome { font-size: 1.8rem; margin-bottom: 12px; }
+            .hero-welcome .welcome-text { font-size: 0.9rem; margin-bottom: 6px; }
+            .hero-welcome .hotel-name { font-size: 2.1rem; }
+            .hero-welcome .ampersand-events { font-size: 1.8rem; }
+            .hero-subtitle { font-size: 0.95rem; margin-bottom: 20px; text-align: center; }
+            .hero-highlights { align-items: center; gap: 8px; margin-bottom: 20px; }
+            .highlight-item { font-size: 0.95rem; justify-content: center; }
+            .highlight-item i { font-size: 1.1rem; }
+            .hero-actions { justify-content: center; gap: 10px; }
+            .hero-info-cards { gap: 12px; margin-top: 15px; }
+            .info-card { padding: 15px; }
+            .info-card h3 { font-size: 1.05rem; }
+            .info-card p { font-size: 0.78rem; }
+            .feature-tag { padding: 3px 8px; font-size: 0.68rem; }
+
+            /* Buttons */
+            .btn { width: 100%; max-width: 280px; justify-content: center; padding: 13px 20px; }
+
+            /* Slideshows */
+            .restaurant-slideshow, .lounge-slideshow { height: 200px !important; }
+
+            /* Grids: collapse to single column */
+            .services-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+            .testimonial-grid { grid-template-columns: 1fr !important; }
+            .footer-content { grid-template-columns: 1fr !important; gap: 28px !important; }
+
+            /* Section headers */
+            .section-header h2 { font-size: 1.9rem; }
+            .section-header { margin-bottom: 36px; }
+        }
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.55rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .hero-subtitle { font-size: 0.92rem; }
+            /* Gallery: single column on very small phones */
+            .gallery-grid { grid-template-columns: 1fr !important; }
+            .gallery-item { height: 230px; }
+            .sec-h { font-size: 1.55rem !important; }
+            .container { padding: 0 14px; }
+        }
+
+        /* ========== MERGED SECTIONS STYLES ========== */
+        .sec-inner { max-width: 1280px; margin: 0 auto; }
+        .eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+        .eyebrow-bar { width: 28px; height: 3px; border-radius: 2px; }
+        .eb-g { background: var(--grn); } .ey-g { color: var(--grn); }
+        .eb-r { background: var(--red); } .ey-r { color: var(--red); }
+        .eb-o { background: var(--org); } .ey-o { color: var(--org); }
+        .eb-gd { background: var(--gld); } .ey-gd { color: var(--gld); }
+        .sec-h { font-family: var(--serif); font-size: clamp(26px, 4vw, 46px); font-weight: 700; line-height: 1.15; margin-bottom: 10px; }
+        .sec-p { font-size: 15.5px; color: var(--muted); line-height: 1.72; max-width: 600px; }
+        .acc-line { width: 52px; height: 4px; border-radius: 3px; margin: 10px 0 16px; }
+        .al-g { background: var(--grn); }
+        .al-r { background: var(--red); }
+        .al-o { background: var(--org); }
+        .al-gd { background: var(--gld); }
+        
+        /* About Us Section Styles */
+        #about { background: var(--bg-gray); padding: 25px 20px; scroll-margin-top: 55px; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; margin-top: 20px; }
+        .about-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 12px; }
+        .astat { background: #fff; border-radius: 12px; padding: 12px 10px; text-align: center; box-shadow: var(--shadow); }
+        .astat-n { font-family: var(--serif); font-size: 34px; font-weight: 700; color: var(--red); margin-bottom: 4px; }
+        .astat-l { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 0.1em; }
+        .about-text p { font-size: 15px; color: var(--muted); line-height: 1.78; margin-bottom: 14px; }
+        .about-mosaic { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 180px 180px; gap: 12px; }
+        .am-photo { border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 56px; cursor: pointer; transition: transform .3s; background-size: cover !important; background-position: center !important; }
+        .am-photo:hover { transform: scale(1.03); }
+        .am-big { grid-row: span 2; }
+
+        /* FAQ Section Styles */
+        #faq { background: var(--bg-gray); padding: 25px 20px; scroll-margin-top: 55px; }
+        .faq-split-tabs { display: flex; gap: 0; margin-bottom: 16px; border-radius: 10px; overflow: hidden; border: 2px solid #eee; max-width: 420px; }
+        .fst { flex: 1; padding: 13px; font-family: var(--sans); font-size: 13px; font-weight: 800; cursor: pointer; border: none; background: #e8e8e8; color: #aaa; transition: all .2s; }
+        .fst.fst-active-l { background: var(--grn); color: #fff; }
+        .fst.fst-active-e { background: var(--red); color: #fff; }
+        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .faq-item { background: #fff; border-radius: 10px; padding: 20px; border: 1px solid #eee; cursor: pointer; transition: border-color .2s, box-shadow .2s; }
+        .faq-item:hover { border-color: var(--org); box-shadow: 0 4px 16px rgba(255, 107, 0, 0.08); }
+        .faq-q { font-size: 14px; font-weight: 800; color: #222; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+        .faq-ico { color: var(--org); font-size: 16px; flex-shrink: 0; }
+        .faq-a { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+        /* Contact Cards and Forms Styles */
+        .contact-choice { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+        .cc-card { border-radius: 18px; padding: 20px; cursor: pointer; transition: transform .28s, box-shadow .28s; display: flex; flex-direction: column; }
+        .cc-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .cc-restaurant { background: linear-gradient(135deg, #6F3707, #A15217); }
+        .cc-lounge { background: linear-gradient(135deg, #004D26, #008040); }
+        .cc-events { background: linear-gradient(135deg, #5E001F, #8F002E); }
+        .cc-ico { font-size: 30px; margin-bottom: 6px; display: block; }
+        .cc-title { font-family: var(--serif); font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+        .cc-sub { font-size: 13px; color: rgba(255, 255, 255, 0.72); line-height: 1.45; margin-bottom: 10px; }
+        .cc-info { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+        .cc-info-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255, 255, 255, 0.8); }
+        .cc-info-item span { color: var(--gld); }
+        .cc-btn-o { background: #A15217; color: #fff; display: inline-flex; align-items: center; gap: 6px; padding: 11px 22px; border-radius: 6px; font-family: var(--sans); font-size: 13px; font-weight: 800; text-decoration: none; transition: background .2s; border: 1px solid rgba(255,255,255,0.15); }
+        .cc-btn-o:hover { background: #6F3707; }
+        .cc-btn-g { background: #008040; color: #fff; display: inline-flex; align-items: center; gap: 6px; padding: 11px 22px; border-radius: 6px; font-family: var(--sans); font-size: 13px; font-weight: 800; text-decoration: none; transition: background .2s; border: 1px solid rgba(255,255,255,0.15); }
+        .cc-btn-g:hover { background: #004D26; }
+        .cc-btn-r { background: #8F002E; color: #fff; display: inline-flex; align-items: center; gap: 6px; padding: 11px 22px; border-radius: 6px; font-family: var(--sans); font-size: 13px; font-weight: 800; text-decoration: none; transition: background .2s; border: 1px solid rgba(255,255,255,0.15); }
+        .cc-btn-r:hover { background: #5E001F; }
+
+        .contact-form-panel { background: var(--bg-gray); border-radius: 16px; padding: 36px; box-shadow: var(--shadow); }
+        .cfp-toggle { display: grid; grid-template-columns: 1fr 1fr; border-radius: 10px; overflow: hidden; border: 2px solid #e0e0e0; margin-bottom: 26px; }
+        .cfp-btn { padding: 13px; font-family: var(--sans); font-size: 12.5px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; border: none; background: #e8e8e8; color: #aaa; transition: all .2s; }
+        .cfp-btn.on-l { background: var(--grn); color: #fff; }
+        .cfp-btn.on-e { background: var(--red); color: #fff; }
+        .cfp-title { font-family: var(--serif); font-size: 22px; font-weight: 700; margin-bottom: 5px; color: var(--dark-gray); }
+        .cfp-sub { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+        .f2row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .fg { margin-bottom: 10px; }
+        .fg label { display: block; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 5px; }
+        .fg input, .fg select, .fg textarea { width: 100%; background: #fff; border: 1.5px solid #e0e0e0; border-radius: 8px; padding: 8px 11px; font-family: var(--sans); font-size: 13.5px; color: #222; outline: none; transition: border-color .2s; }
+        .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--org); }
+        .fg select option { background: #fff; }
+        .fg textarea { resize: vertical; min-height: 60px; }
+        .cfp-submit { width: 100%; padding: 15px; border-radius: 8px; font-family: var(--sans); font-size: 14px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; border: none; transition: all .2s; }
+        .cfps-l { background: var(--grn); color: #fff; }
+        .cfps-l:hover { background: #e58f00; }
+        .cfps-e { background: var(--red); color: #fff; }
+        .cfps-e:hover { background: #c43c10; }
+        .wa-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; color: #fff; padding: 14px; border-radius: 10px; font-family: var(--sans); font-size: 13.5px; font-weight: 800; text-decoration: none; margin-top: 16px; transition: opacity .2s; text-transform: uppercase; letter-spacing: 0.04em; }
+        .wa-btn:hover { opacity: 0.9; }
+
+        /* Responsive adjustments for new sections */
+        @media (max-width: 992px) {
+            .contact-choice { grid-template-columns: 1fr; gap: 16px; }
+        }
+        @media (max-width: 768px) {
+            /* About section */
+            .about-grid { grid-template-columns: 1fr; gap: 28px; }
+            .about-stat-row {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 8px !important;
+                margin-bottom: 20px;
+            }
+            .astat { padding: 12px 6px !important; border-radius: 8px; }
+            .astat-n { font-size: 24px !important; margin-bottom: 2px; }
+            .astat-l { font-size: 8px !important; letter-spacing: 0.05em; }
+
+            /* About mosaic: stack vertically on mobile */
+            .about-mosaic {
+                grid-template-columns: 1fr !important;
+                grid-template-rows: 200px 150px 150px !important;
+                gap: 10px;
+            }
+            .am-big { grid-row: auto !important; }
+
+            /* FAQ */
+            .faq-grid { grid-template-columns: 1fr; }
+
+            /* Contact form */
+            .f2row { grid-template-columns: 1fr; gap: 14px; }
+            .contact-form-panel { padding: 24px 16px; }
+            .cc-card { padding: 20px !important; }
+            .cc-title { font-size: 18px; }
+
+            /* Gallery controls: horizontal scrollable pills */
+            .gallery-controls {
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 12px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 8px;
+                margin-bottom: 25px;
+            }
+            .gallery-controls::-webkit-scrollbar { display: none; }
+            .filter-btn {
+                padding: 8px 18px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            /* Service cards */
+            .service-img { height: 180px; }
+            .service-content { padding: 20px; }
+
+            /* Footer */
+            .social-links { flex-wrap: wrap; }
+            .map-btn { font-size: 0.8rem; padding: 9px 16px; }
+            .copyright { font-size: 0.82rem; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/254718770846?text=Hello%20Express%20Hotel%20and%20Events%2C%20I%20need%20assistance" class="whatsapp-float" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    <header>
+        <div class="header-container">
+            <a href="#home" class="logo">
+                <img src="https://i.ibb.co/Z1gnYf0V/logo-express.jpg" alt="Express Hotel and Events Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Express Hotel and Events</h1>
+                    <span class="logo-tagline">Authentic African Hospitality</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#restaurant">Restaurant</a></li>
+                    <li><a href="#lounge">Lounge</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#contact" class="btn-book">Book Now</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-welcome">
+                        <span class="welcome-text">Welcome to</span>
+                        <span class="hotel-name">Express Hotel</span>
+                        <span class="ampersand-events">&amp; Events</span>
+                    </div>
+
+                    <p class="hero-subtitle">
+                        Where traditional African warmth meets world-class service. Experience authentic hospitality in the heart of Nyandarua, Kenya.
+                    </p>
+
+                    <div class="hero-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-utensils"></i>
+                            <span>Premium Dining Experience</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-glass-cheers"></i>
+                            <span>Elegant Lounge & Bar</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Professional Event Planning</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a href="#lounge" class="btn btn-hero-lounge"><i class="fas fa-leaf"></i> Explore Lounge</a>
+                        <a href="#services" class="btn btn-hero-events"><i class="fas fa-calendar-alt"></i> Explore Events</a>
+                    </div>
+                </div>
+
+                <div class="hero-info-cards">
+                    <div class="info-card card-lounge">
+                        <div class="info-card-header">
+                            <span class="info-card-icon">🍃</span>
+                            <span>Express Lounge</span>
+                        </div>
+                        <h3>Your Premium Lounge Experience</h3>
+                        <p>Experience the perfect blend of comfort, entertainment, and authentic African hospitality. Lush jungle atmosphere meets world-class service.</p>
+                        <div class="card-features">
+                            <span class="feature-tag">🍷 Bar & Lounge</span>
+                            <span class="feature-tag">🏨 Hotel</span>
+                            <span class="feature-tag">🎱 Pool Tables</span>
+                            <span class="feature-tag">📺 Live Sports</span>
+                            <span class="feature-tag">🍖 Nyama Choma</span>
+                            <span class="feature-tag">🎵 DJ Nights</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card card-events">
+                        <div class="info-card-header">
+                            <span class="info-card-icon">🎉</span>
+                            <span>Express Events</span>
+                        </div>
+                        <h3>Complete Events Solution</h3>
+                        <p>From intimate gatherings to grand celebrations, we handle everything. Weddings, corporate events, private parties - all with world-class service and attention to detail.</p>
+                        <div class="card-features">
+                            <span class="feature-tag">⛺ Variety of Tents</span>
+                            <span class="feature-tag">🍽️ Catering</span>
+                            <span class="feature-tag">🎂 Cakes</span>
+                            <span class="feature-tag">🚽 Portable Loos</span>
+                            <span class="feature-tag">💒 Weddings</span>
+                            <span class="feature-tag">🏢 Corporate Events</span>
+                            <span class="feature-tag">🚗 Car Hire</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
+        </section>
+
+        <!-- About Us -->
+        <section id="about" class="section">
+          <div class="sec-inner">
+            <div class="eyebrow"><div class="eyebrow-bar eb-r"></div><span class="ey-r">Who We Are</span></div>
+            <h2 class="sec-h">About <span style="color:var(--org);">Express Hotel &amp; Events</span></h2>
+            <div class="acc-line al-r"></div>
+            <div class="about-grid">
+              <div class="about-text">
+                <div class="about-stat-row">
+                  <div class="astat"><div class="astat-n">14+</div><div class="astat-l">Years Experience</div></div>
+                  <div class="astat"><div class="astat-n">500+</div><div class="astat-l">Events Done</div></div>
+                  <div class="astat" style="border-top:3px solid var(--gld);"><div class="astat-n" style="color:var(--gld);">🏆</div><div class="astat-l">Award Winning</div></div>
+                </div>
+                <p class="sec-p" style="margin-bottom:14px;">Express Hotel &amp; Events is Nyandarua's premier all-in-one hospitality destination — combining a vibrant hotel and lounge with a full-service events and catering operation.</p>
+                <p class="sec-p" style="margin-bottom:14px;">Founded over 14 years ago with a passion for exceptional service, we have grown into one of Kenya's most trusted event and hospitality brands — from intimate private parties to state-level functions and 1,000-guest weddings.</p>
+                <p class="sec-p" style="margin-bottom:24px;">Our award-winning team brings expertise, creativity and precision to everything we do — whether you are reserving a table in our lounge or trusting us with the catering for your child's graduation.</p>
+                <a href="#contact" class="btn btn-primary"><i class="fas fa-envelope"></i> Get in Touch</a>
+              </div>
+              <div class="about-mosaic">
+                <div class="am-photo am-big" style="background-image:url('https://i.ibb.co/QFNQ8Zh1/Lounge-pic.jpg')"></div>
+                <div class="am-photo" style="background-image:url('https://i.ibb.co/ccQjg36K/lounge-dining.jpg')"></div>
+                <div class="am-photo" style="background-image:url('https://i.ibb.co/Ng4J3f3q/beautiful-event-space.jpg')"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Restaurant -->
+        <section id="restaurant">
+            <div class="container">
+                <div class="section-header">
+                    <h2>African Cuisine Restaurant</h2>
+                    <p>Savor authentic flavors with modern presentation and traditional hospitality</p>
+                </div>
+                <div class="restaurant-container">
+                    <div class="restaurant-info">
+                        <h3>Experience Culinary Excellence</h3>
+                        <p>Our restaurant offers a unique dining experience combining traditional African cuisine with international flavors. Enjoy freshly prepared meals using locally sourced ingredients from Kenyan farms.</p>
+                        <div class="restaurant-features">
+                            <div class="restaurant-feature"><i class="fas fa-check-circle"></i><span>Authentic African Cuisine</span></div>
+                            <div class="restaurant-feature"><i class="fas fa-check-circle"></i><span>Fresh Local Ingredients</span></div>
+                            <div class="restaurant-feature"><i class="fas fa-check-circle"></i><span>Vegetarian & Vegan Options</span></div>
+                            <div class="restaurant-feature"><i class="fas fa-check-circle"></i><span>Professional Chef Team</span></div>
+                            <div class="restaurant-feature"><i class="fas fa-check-circle"></i><span>Family-Friendly Environment</span></div>
+                        </div>
+                    </div>
+                    <div class="restaurant-slideshow">
+                        <div class="slideshow-container" id="restaurantSlideshow">
+                            <div class="slide"><img src="https://i.ibb.co/6cGn2nH7/f1.jpg" alt="Restaurant dining area"></div>
+                            <div class="slide"><img src="https://i.ibb.co/xKCxfJ2C/f2.jpg" alt="Modern restaurant interior"></div>
+                            <div class="slide"><img src="https://i.ibb.co/hxC8hxMW/f3.jpg" alt="Cozy dining atmosphere"></div>
+                            <div class="slide"><img src="https://i.ibb.co/67G0jWpV/f4.jpg" alt="Elegant table setup"></div>
+                            <div class="slide"><img src="https://i.ibb.co/HfY2FLjN/res-3.jpg" alt="Restaurant entrance at sunset"></div>
+                        </div>
+                        <div class="slideshow-controls">
+                            <div class="slideshow-dots" id="restaurantDots"></div>
+                            <div class="slideshow-nav">
+                                <button class="slideshow-btn" id="restaurantPrev"><i class="fas fa-chevron-left"></i></button>
+                                <button class="slideshow-btn" id="restaurantNext"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lounge -->
+        <section class="lounge-section" id="lounge">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Premium Lounge & Bar</h2>
+                    <p>Relax and unwind in our sophisticated lounge atmosphere with premium entertainment</p>
+                </div>
+                <div class="lounge-container">
+                    <div class="lounge-slideshow">
+                        <div class="slideshow-container" id="loungeSlideshow">
+                            <div class="slide"><img src="https://i.ibb.co/QFNQ8Zh1/Lounge-pic.jpg" alt="Lounge interior"></div>
+                            <div class="slide"><img src="https://i.ibb.co/ccQjg36K/lounge-entrance.jpg" alt="Lounge entrance"></div>
+                            <div class="slide"><img src="https://i.ibb.co/cKp652Km/lounge-4.jpg" alt="Lounge seating"></div>
+                            <div class="slide"><img src="https://i.ibb.co/ZphW2WJP/lounge-2.jpg" alt="Lounge social area"></div>
+                        </div>
+                        <div class="slideshow-controls">
+                            <div class="slideshow-dots" id="loungeDots"></div>
+                            <div class="slideshow-nav">
+                                <button class="slideshow-btn" id="loungePrev"><i class="fas fa-chevron-left"></i></button>
+                                <button class="slideshow-btn" id="loungeNext"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lounge-info">
+                        <h3>Elegant Lounge Experience</h3>
+                        <p>Our premium lounge offers a sophisticated atmosphere perfect for relaxation, business meetings, or social gatherings. Enjoy expertly crafted cocktails, premium spirits, and a selection of fine wines.</p>
+                        <div class="restaurant-features">
+                            <div class="restaurant-feature"><i class="fas fa-check-circle"></i><span>Premium Cocktails & Spirits</span></div>
+                            <div class="restaurant-feature"><i class="fas fa-check-circle"></i><span>Live Music & Entertainment</span></div>
+                            <div class="restaurant-feature"><i class="fas fa-check-circle"></i><span>Comfortable Lounge Seating</span></div>
+                            <div class="restaurant-feature"><i class="fas fa-check-circle"></i><span>Private Lounge Areas</span></div>
+                            <div class="restaurant-feature"><i class="fas fa-check-circle"></i><span>Sports Screening Area</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Services</h2>
+                    <p>Comprehensive hospitality services with authentic African touch</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-img"><img src="https://i.ibb.co/PZMXPWZR/20201205-133523.jpg" alt="Catering"></div>
+                        <div class="service-content"><div class="service-icon"><i class="fas fa-utensils"></i></div><h3>Catering Services</h3><p>Professional catering for all events with authentic African cuisine and international dishes.</p><a href="#contact" class="btn btn-primary" style="margin-top:20px">Book Catering</a></div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-img"><img src="https://i.ibb.co/Ng4J3f3q/Beautiful-Event-Image.jpg" alt="Events"></div>
+                        <div class="service-content"><div class="service-icon"><i class="fas fa-toolbox"></i></div><h3>Events & Supplies</h3><p>Complete event planning and equipment rental for weddings, conferences, and celebrations.</p><a href="#contact" class="btn btn-primary" style="margin-top:20px">Plan Event</a></div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-img"><img src="https://i.ibb.co/tr58k6V/hall-pic-1.jpg" alt="Conference"></div>
+                        <div class="service-content"><div class="service-icon"><i class="fas fa-glass-cheers"></i></div><h3>Conference Facilities</h3><p>Modern conference halls equipped with the latest technology for business meetings and seminars.</p><a href="#contact" class="btn btn-primary" style="margin-top:20px">Book Conference</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section class="gallery-section" id="gallery">
+            <div class="container">
+                <div class="section-header"><h2>Photo Gallery</h2><p>Explore our premium restaurant, lounge, catering services, custom cakes, mobile sanitation, tents & decor, and conference facilities through pictures</p></div>
+                <div class="gallery-controls">
+                    <button class="filter-btn active" data-filter="all">All Photos</button>
+                    <button class="filter-btn" data-filter="restaurant">Restaurant</button>
+                    <button class="filter-btn" data-filter="lounge">Lounge</button>
+                    <button class="filter-btn" data-filter="catering">Catering</button>
+                    <button class="filter-btn" data-filter="tents">Tents & Decor</button>
+                    <button class="filter-btn" data-filter="cakes">Cakes</button>
+                    <button class="filter-btn" data-filter="loos">Portable Loos</button>
+                    <button class="filter-btn" data-filter="conferences">Conference Halls</button>
+                </div>
+                <div class="gallery-grid">
+                    <!-- Restaurant (5) -->
+                    <div class="gallery-item" data-category="restaurant"><img src="https://i.ibb.co/6cGn2nH7/f1.jpg" alt="Restaurant"><div class="gallery-overlay"><h4>Restaurant Dining Area</h4><p>Spacious and elegant dining space</p></div></div>
+                    <div class="gallery-item" data-category="restaurant"><img src="https://i.ibb.co/xKCxfJ2C/f2.jpg" alt="Restaurant"><div class="gallery-overlay"><h4>Modern Interior</h4><p>Contemporary African design touches</p></div></div>
+                    <div class="gallery-item" data-category="restaurant"><img src="https://i.ibb.co/hxC8hxMW/f3.jpg" alt="Restaurant"><div class="gallery-overlay"><h4>Cozy Atmosphere</h4><p>Warm and inviting lighting</p></div></div>
+                    <div class="gallery-item" data-category="restaurant"><img src="https://i.ibb.co/67G0jWpV/f4.jpg" alt="Restaurant"><div class="gallery-overlay"><h4>Elegant Table Setup</h4><p>Perfect for fine dining</p></div></div>
+                    <div class="gallery-item" data-category="restaurant"><img src="https://i.ibb.co/HfY2FLjN/res-3.jpg" alt="Restaurant Entrance"><div class="gallery-overlay"><h4>Restaurant Entrance</h4><p>Welcoming entrance at sunset with our landmark sign</p></div></div>
+
+                    <!-- Lounge (15) -->
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/QFNQ8Zh1/Lounge-pic.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Premium Lounge</h4><p>Sophisticated nightlife & drinks area</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/ccQjg36K/lounge-entrance.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Lounge Entrance</h4><p>Welcoming premium entrance</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/cKp652Km/lounge-4.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Lounge Seating</h4><p>Plush comfortable leather seating</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/ZphW2WJP/lounge-2.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Social Area</h4><p>Vibrant social space for friends</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/wrRpnrrJ/pool.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Pool Table Area</h4><p>Premium pool table & entertainment</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/VYKyFznX/vip.jpg" alt="Lounge"><div class="gallery-overlay"><h4>VIP Seating</h4><p>Exclusive lounge seating for guests</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/Kj43hpWN/Whats-App-Image-2026-05-21-at-22-17-52-1.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Exquisite Lounge Seating</h4><p>Elegant plush seating and warm ambiance for private groups</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/3mjLzXjT/Whats-App-Image-2026-05-21-at-22-18-06.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Premium Sports & Entertainment</h4><p>State-of-the-art sports screening setup with elite vibes</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/RkmvS0Wx/Whats-App-Image-2026-05-21-at-22-17-50-2.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Vibrant Social Bar Space</h4><p>Contemporary bar area with curated premium spirits & cocktails</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/xqbcQc87/Whats-App-Image-2026-05-21-at-22-17-54-1.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Exclusive VIP Lounge Area</h4><p>Sophisticated layouts and refined settings for premium networking</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/bg1MkmTH/Whats-App-Image-2026-05-21-at-22-17-56-1.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Chic Social Lounge Setup</h4><p>Curated contemporary seating arrangements and polished modern atmosphere</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/6pDr41N/drinks.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Artisanal Cocktails & Drinks</h4><p>An exquisite selection of signature mixology creations and curated premium beverages</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/3yPzpHV8/Whats-App-Image-2026-05-22-at-00-36-23.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Sophisticated Lounge Ambiance</h4><p>Immersive contemporary decor featuring luxury seating and soft ambient lighting</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/WwhHMgs/Bailey-s.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Elite Spirits Selection</h4><p>A premium showcase of world-class liqueurs and spirits served in refined luxury</p></div></div>
+                    <div class="gallery-item" data-category="lounge"><img src="https://i.ibb.co/201ZXbbm/Whats-App-Image-2026-05-22-at-00-36-22.jpg" alt="Lounge"><div class="gallery-overlay"><h4>Modern Lounge Retreat</h4><p>Plush stylish arrangements perfect for exclusive corporate networking or private unwinding</p></div></div>
+
+                    <!-- Catering (11) -->
+                    <div class="gallery-item" data-category="catering"><img src="https://i.ibb.co/pvqhHVb6/add-2.jpg" alt="Catering"><div class="gallery-overlay"><h4>Outdoor Buffet Catering</h4><p>Elegant outdoor buffet setup with professional service</p></div></div>
+                    <div class="gallery-item" data-category="catering"><img src="https://i.ibb.co/HZDYG5K/add-3.jpg" alt="Catering"><div class="gallery-overlay"><h4>Professional Catering Service</h4><p>Exquisite buffet setup with uniform-clad staff</p></div></div>
+                    <div class="gallery-item" data-category="catering"><img src="https://i.ibb.co/gZVkM9W8/add-4.jpg" alt="Catering"><div class="gallery-overlay"><h4>Signature Pilau Catering</h4><p>Delicious traditional spiced rice served in style</p></div></div>
+                    <div class="gallery-item" data-category="catering"><img src="https://i.ibb.co/5Xkyb3NN/3d80c013b1bc.jpg" alt="Catering"><div class="gallery-overlay"><h4>Gourmet Beef Stew</h4><p>Rich slow-cooked beef stew - a local specialty</p></div></div>
+                    <div class="gallery-item" data-category="catering"><img src="https://i.ibb.co/rfNQtYrs/33d2726b08db.jpg" alt="Catering"><div class="gallery-overlay"><h4>Layered Chapati</h4><p>Fresh, soft, layered hand-made chapati</p></div></div>
+                    <div class="gallery-item" data-category="catering"><img src="https://i.ibb.co/Myj4bPTj/da9d02afc9aa.jpg" alt="Catering"><div class="gallery-overlay"><h4>Elegant Buffet Spread</h4><p>Gold & black corporate buffet arrangement</p></div></div>
+                    <div class="gallery-item" data-category="catering"><img src="https://i.ibb.co/QvjQGNFf/014bf25d327e.jpg" alt="Catering"><div class="gallery-overlay"><h4>Nyama Choma Selection</h4><p>Premium roasted & grilled meats</p></div></div>
+                    <div class="gallery-item" data-category="catering"><img src="https://i.ibb.co/rfGVLxgD/1f130e826d33.jpg" alt="Catering"><div class="gallery-overlay"><h4>Roasted Chicken</h4><p>Tender roasted chicken marinated in local herbs</p></div></div>
+                    <div class="gallery-item" data-category="catering"><img src="https://i.ibb.co/zVCVgmVV/add-1.jpg" alt="Catering"><div class="gallery-overlay"><h4>Premium Event Catering</h4><p>Professional buffet service with high-quality chafing setups</p></div></div>
+                    <div class="gallery-item" data-category="catering"><img src="https://i.ibb.co/fdSdS7q9/add-5.jpg" alt="Catering"><div class="gallery-overlay"><h4>Garden Buffet Catering</h4><p>Fresh fruit platters and refreshments for outdoor garden parties</p></div></div>
+                    <div class="gallery-item" data-category="catering"><img src="https://i.ibb.co/sJP6b8s4/Whats-App-Image-2026-05-22-at-00-14-16.jpg" alt="Catering"><div class="gallery-overlay"><h4>Premium Banqueting Display</h4><p>A spectacular presentation of gourmet culinary delicacies curated for grand celebrations</p></div></div>
+
+                    <!-- Tents & Decor (11) -->
+                    <div class="gallery-item" data-category="tents"><img src="https://i.ibb.co/Ng4J3f3q/Beautiful-Event-Image.jpg" alt="Tents & Decor"><div class="gallery-overlay"><h4>Wedding Reception Styling</h4><p>Elegant indoor floral & banquet decor setup</p></div></div>
+                    <div class="gallery-item" data-category="tents"><img src="https://i.ibb.co/bMm9qJt9/wedding.jpg" alt="Tents & Decor"><div class="gallery-overlay"><h4>Premium Event Décor</h4><p>Luxurious wedding and ceremony styling</p></div></div>
+                    <div class="gallery-item" data-category="tents"><img src="https://i.ibb.co/TDLGMvRm/tent-04.jpg" alt="Tents & Decor"><div class="gallery-overlay"><h4>Luxury Event Tents</h4><p>Premium domes & high-peak tents</p></div></div>
+                    <div class="gallery-item" data-category="tents"><img src="https://i.ibb.co/1tPQ2npT/valentines.jpg" alt="Tents & Decor"><div class="gallery-overlay"><h4>Romantic Dinner Styling</h4><p>Exquisite tabletop decorations for intimate special events</p></div></div>
+                    <div class="gallery-item" data-category="tents"><img src="https://i.ibb.co/Ps04jbpz/10b2259a2584.jpg" alt="Tents & Decor"><div class="gallery-overlay"><h4>Traditional Ruracio Setup</h4><p>Traditional ceremony catering & tent styling</p></div></div>
+                    <div class="gallery-item" data-category="tents"><img src="https://i.ibb.co/23Kb2s3c/tent-03.jpg" alt="Tents & Decor"><div class="gallery-overlay"><h4>Alpine Peak Tents</h4><p>Timeless high-peak designs for garden ceremonies</p></div></div>
+                    <div class="gallery-item" data-category="tents"><img src="https://i.ibb.co/kgn1fRQM/tent-05.jpg" alt="Tents & Decor"><div class="gallery-overlay"><h4>Hexagonal Canopy Tents</h4><p>Modern hexagonal structures for premium events</p></div></div>
+                    <div class="gallery-item" data-category="tents"><img src="https://i.ibb.co/XrZ8BkqB/Bridal-Floral-Table-Set-UP.jpg" alt="Tents & Decor"><div class="gallery-overlay"><h4>Bridal Floral Table Styling</h4><p>Exquisite floral runners and candlelight styling for bridal tables</p></div></div>
+                    <div class="gallery-item" data-category="tents"><img src="https://i.ibb.co/XkMwFRV4/Burnt-Orangle-Round-Table-Set-Up-1.jpg" alt="Tents & Decor"><div class="gallery-overlay"><h4>Burnt Orange Banquet Styling</h4><p>Beautifully coordinated burnt orange themed guest tables</p></div></div>
+                    <div class="gallery-item" data-category="tents"><img src="https://i.ibb.co/jkD0vjc7/Round-table.jpg" alt="Tents & Decor"><div class="gallery-overlay"><h4>Classic Round Table Decor</h4><p>Luxurious gold chairs and premium tabletop decor</p></div></div>
+
+                    <!-- Cakes (8) -->
+                    <div class="gallery-item" data-category="cakes"><img src="https://i.ibb.co/MkM6qBPc/cake-02.jpg" alt="Cakes"><div class="gallery-overlay"><h4>Royal Lavender Cake</h4><p>Premium custom celebration cake</p></div></div>
+                    <div class="gallery-item" data-category="cakes"><img src="https://i.ibb.co/ym7hH2mJ/cake-07.jpg" alt="Cakes"><div class="gallery-overlay"><h4>Princess Sofia Cake</h4><p>Custom children's themed birthday cake</p></div></div>
+                    <div class="gallery-item" data-category="cakes"><img src="https://i.ibb.co/HDVtqWSM/b5773686ceae.jpg" alt="Cakes"><div class="gallery-overlay"><h4>Signature Cake Collection</h4><p>Custom multi-tiered celebration cakes</p></div></div>
+                    <div class="gallery-item" data-category="cakes"><img src="https://i.ibb.co/LD0bc5FD/ba9e8f004a8f.jpg" alt="Cakes"><div class="gallery-overlay"><h4>African Ankara Cake</h4><p>Cultural Ankara-patterned heritage cake</p></div></div>
+                    <div class="gallery-item" data-category="cakes"><img src="https://i.ibb.co/gZYpRHf3/139db8b0a268.jpg" alt="Cakes"><div class="gallery-overlay"><h4>Garden Wedding Cake</h4><p>Exquisite cake for garden wedding receptions</p></div></div>
+                    <div class="gallery-item" data-category="cakes"><img src="https://i.ibb.co/7NQ8gW1X/af1a7e85ad5d.jpg" alt="Cakes"><div class="gallery-overlay"><h4>Floral Tiered Cake</h4><p>Stunning white & lavender floral wedding cake</p></div></div>
+                    <div class="gallery-item" data-category="cakes"><img src="https://i.ibb.co/B5YwQ63b/8ff5cfabeb86.jpg" alt="Cakes"><div class="gallery-overlay"><h4>Kente Heritage Cake</h4><p>Bold Kente-print celebration tiered cake</p></div></div>
+                    <div class="gallery-item" data-category="cakes"><img src="https://i.ibb.co/MDj0CPBF/6916073b37cc.jpg" alt="Cakes"><div class="gallery-overlay"><h4>Kids Birthday Cake</h4><p>Fun custom-themed cake for children's parties</p></div></div>
+
+                    <!-- Portable Loos (3) -->
+                    <div class="gallery-item" data-category="loos"><img src="https://i.ibb.co/QFMNbtzr/c468bb7f88b2.jpg" alt="Portable Loos"><div class="gallery-overlay"><h4>Mobile Toilet Fleet</h4><p>Large fleet of clean mobile sanitary units</p></div></div>
+                    <div class="gallery-item" data-category="loos"><img src="https://i.ibb.co/hJZDgv0S/822644fbf1df.jpg" alt="Portable Loos"><div class="gallery-overlay"><h4>Executive Interior</h4><p>Standard clean toilet interior with hygiene facilities</p></div></div>
+                    <div class="gallery-item" data-category="loos"><img src="https://i.ibb.co/Tqd7FSmc/b62d75e2a26b.jpg" alt="Portable Loos"><div class="gallery-overlay"><h4>Gents Sanitary Unit</h4><p>Clean urinal & toilet combo unit</p></div></div>
+
+                    <!-- Conference Halls (2) -->
+                    <div class="gallery-item" data-category="conferences"><img src="https://i.ibb.co/tr58k6V/hall-pic-1.jpg" alt="Conference Halls"><div class="gallery-overlay"><h4>Conference Room</h4><p>Air-conditioned modern conference facilities</p></div></div>
+                    <div class="gallery-item" data-category="conferences"><img src="https://i.ibb.co/q3zjqpDw/Whats-App-Image-2026-05-21-at-23-59-38.jpg" alt="Conference Halls"><div class="gallery-overlay"><h4>Elite Conference Suite</h4><p>Sophisticated corporate meeting space designed for high-impact presentations and executive sessions</p></div></div>
+                </div>
+            </div>
+            <div class="lightbox-modal" id="lightboxModal"><button class="close-lightbox">&times;</button><div class="lightbox-content"><img class="lightbox-img" id="lightboxImg" alt=""><div class="lightbox-caption" id="lightboxCaption"></div></div><div class="lightbox-nav"><button class="nav-btn" id="prevBtn">❮</button><button class="nav-btn" id="nextBtn">❯</button></div></div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials">
+            <div class="container">
+                <div class="section-header"><h2>Guest Reviews</h2><p>See what our guests have to say</p></div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card"><div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testimonial-text">"The nyama choma at Express Hotel and Events is the best I've ever had! Authentic flavors and perfect preparation."</p><div class="testimonial-author"><div class="author-avatar">J</div><div><h4>James Mwangi</h4><p>Nairobi, Kenya</p></div></div></div>
+                    <div class="testimonial-card"><div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testimonial-text">"We held our company event here and it was perfect. The catering was excellent and the service was impeccable."</p><div class="testimonial-author"><div class="author-avatar">S</div><div><h4>Sarah Johnson</h4><p>International NGO</p></div></div></div>
+                    <div class="testimonial-card"><div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testimonial-text">"The outdoor area is absolutely beautiful! We had our wedding reception here and the garden setting was perfect."</p><div class="testimonial-author"><div class="author-avatar">A</div><div><h4>Alice Wangari</h4><p>Nyeri, Kenya</p></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section">
+          <div class="sec-inner">
+            <div class="eyebrow"><div class="eyebrow-bar eb-o"></div><span class="ey-o">❓ FAQ</span></div>
+            <h2 class="sec-h">Frequently Asked <span style="color:var(--org);">Questions</span></h2>
+            <div class="acc-line al-o"></div>
+            <div class="faq-split-tabs">
+              <button class="fst fst-active-l" id="fst-lounge" onclick="switchFAQ('lounge')">🌿 Lounge Questions</button>
+              <button class="fst" id="fst-events" onclick="switchFAQ('events')">🎉 Events Questions</button>
+            </div>
+            <!-- Lounge FAQs -->
+            <div class="faq-grid" id="faq-lounge">
+              <div class="faq-item"><div class="faq-q">How do I reserve a table?<span class="faq-ico">+</span></div><div class="faq-a">You can reserve a table online through our booking form, call us on +254 718 770 846, or send a WhatsApp message. We confirm within 2 hours.</div></div>
+              <div class="faq-item"><div class="faq-q">Is there a minimum spend for group bookings?<span class="faq-ico">+</span></div><div class="faq-a">For groups of 10+ we require a small reservation deposit to secure the table. Contact us to discuss your specific needs.</div></div>
+              <div class="faq-item"><div class="faq-q">What sports matches do you show?<span class="faq-ico">+</span></div><div class="faq-a">We show all major football leagues — Premier League, Champions League, La Liga, Serie A and international matches including AFCON and World Cup.</div></div>
+              <div class="faq-item"><div class="faq-q">Can I book the lounge for a private event?<span class="faq-ico">+</span></div><div class="faq-a">Yes! We offer private hire of the lounge for corporate meetings, birthday celebrations and group events. Contact us for pricing and availability.</div></div>
+            </div>
+            <!-- Events FAQs -->
+            <div class="faq-grid" id="faq-events" style="display:none;">
+              <div class="faq-item"><div class="faq-q">How far in advance should I book?<span class="faq-ico">+</span></div><div class="faq-a">We recommend 4–8 weeks for large events like weddings, and 2–4 weeks for smaller events. Last-minute bookings are accepted based on availability.</div></div>
+              <div class="faq-item"><div class="faq-q">Do you travel outside Nyandarua?<span class="faq-ico">+</span></div><div class="faq-a">Yes — we operate nationwide across Kenya. Travel and transport costs are quoted separately based on your event location and logistics.</div></div>
+              <div class="faq-item"><div class="faq-q">Do you offer tastings before my event?<span class="faq-ico">+</span></div><div class="faq-a">Yes! We offer complimentary tastings for wedding catering packages. For corporate events, a sample tasting can be arranged on request.</div></div>
+              <div class="faq-item"><div class="faq-q">What payment methods do you accept?<span class="faq-ico">+</span></div><div class="faq-a">We accept M-Pesa, bank transfer and cash. A 40% deposit confirms your booking, with the balance due on or before the event day.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section">
+          <div class="sec-inner">
+            <div class="eyebrow"><div class="eyebrow-bar eb-o"></div><span class="ey-o">📞 Contact Us</span></div>
+            <h2 class="sec-h">Get in Touch — <span style="color:var(--org);">Choose Your Department</span></h2>
+            <div class="acc-line al-o"></div>
+            <p class="sec-p" style="margin-bottom:0;">Click on a department below to quickly set up your message or contact our team directly via WhatsApp.</p>
+            
+            <!-- Three department cards -->
+            <div class="contact-choice">
+              <!-- Restaurant Card -->
+              <div class="cc-card cc-restaurant" onclick="setContactFormSelect('Restaurant Reservation');location.href='#contactForm'">
+                <span class="cc-ico">🛎️</span>
+                <div class="cc-title">Restaurant</div>
+                <div class="cc-sub">For menu enquiries, dining reservations and food orders.</div>
+                <div class="cc-info">
+                  <div class="cc-info-item"><span>📞</span> +254 745 055 694</div>
+                  <div class="cc-info-item"><span>✉️</span> <a href="mailto:food@ehafrica.com?subject=Restaurant%20Enquiry%20-%20Express%20Hotel%20and%20Events&body=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20on%20Express%20Hotel%20and%20Events" onclick="event.stopPropagation()" style="color: inherit; text-decoration: none; font-weight: 500;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">food@ehafrica.com</a></div>
+                </div>
+                <div style="margin-top:auto;">
+                  <a href="https://wa.me/254745055694?text=Hello%20Express%20Hotel%20Restaurant%20Team%2C%20I%20need%20assistance" class="cc-btn-o" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp Restaurant</a>
+                </div>
+              </div>
+
+              <!-- Lounge & Bar Card -->
+              <div class="cc-card cc-lounge" onclick="setContactFormSelect('Lounge Reservation');location.href='#contactForm'">
+                <span class="cc-ico">🌿</span>
+                <div class="cc-title">Lounge &amp; Bar</div>
+                <div class="cc-sub">Table bookings, live sports, VIP reservations and bar enquiries.</div>
+                <div class="cc-info">
+                  <div class="cc-info-item"><span>📞</span> +254 745 055 794</div>
+                  <div class="cc-info-item"><span>✉️</span> <a href="mailto:lounge@ehafrica.com?subject=Lounge%20Enquiry%20-%20Express%20Hotel%20and%20Events&body=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20on%20Express%20Hotel%20and%20Events" onclick="event.stopPropagation()" style="color: inherit; text-decoration: none; font-weight: 500;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">lounge@ehafrica.com</a></div>
+                </div>
+                <div style="margin-top:auto;">
+                  <a href="https://wa.me/254745055794?text=Hello%20Express%20Hotel%20Lounge%20Team%2C%20I%20need%20assistance" class="cc-btn-g" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp Lounge</a>
+                </div>
+              </div>
+
+              <!-- Events & Catering Card -->
+              <div class="cc-card cc-events" onclick="setContactFormSelect('Event Planning');location.href='#contactForm'">
+                <span class="cc-ico">🎉</span>
+                <div class="cc-title">Express Events &amp; Catering</div>
+                <div class="cc-sub">Tent hire, catering, cakes, portable loos and full event packages.</div>
+                <div class="cc-info">
+                  <div class="cc-info-item"><span>📞</span> +254 718 770 846</div>
+                  <div class="cc-info-item"><span>✉️</span> <a href="mailto:worldclassexpresseventsandcate@gmail.com?subject=Events%20%26%20Catering%20Enquiry%20-%20Express%20Hotel%20and%20Events&body=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20on%20Express%20Hotel%20and%20Events" onclick="event.stopPropagation()" style="color: inherit; text-decoration: none; font-weight: 500; word-break: break-all;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">worldclassexpresseventsandcate@gmail.com</a></div>
+                </div>
+                <div style="margin-top:auto;">
+                  <a href="https://wa.me/254718770846?text=Hello%20Express%20Hotel%20Events%20Team%2C%20I%20need%20assistance" class="cc-btn-r" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp Events &amp; Catering</a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="contact-form" style="margin-top: 20px; background: var(--bg-gray); border-radius: 16px; padding: 22px; box-shadow: var(--shadow);">
+                <form id="contactForm" method="POST" action="https://formsubmit.co/worldclassexpresseventsandcate@gmail.com">
+                    <input type="hidden" name="_subject" value="New Inquiry - Express Hotel and Events">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" id="_nextField" value="">
+                    
+                    <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 700; margin-bottom: 5px; color: var(--dark-gray);">Send Us a Message</h3>
+                    <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 24px;">Have questions or want to make a booking? Fill out this form and our team will get back to you promptly.</p>
+                    
+                    <div id="sendingState" style="display:none; padding:12px; background:rgba(255,102,0,0.1); border-radius:6px; margin-bottom:14px; font-size:13px; color:var(--org); font-weight:700;">Sending your request... please wait.</div>
+                    <div id="formSuccess" style="display:none; background:#4CAF50; color:white; padding:18px; border-radius:8px; text-align:center; margin-bottom:14px;">
+                      <i class="fas fa-check-circle" style="font-size:24px; margin-bottom:6px; display:block;"></i>
+                      <strong style="font-size:15px; display:block; margin-bottom:4px;">Request Sent Successfully!</strong>
+                      <span style="font-size:12.5px;">Thank you. We have received your details and will get back to you shortly.</span>
+                    </div>
+
+                    <div class="f2row">
+                        <div class="fg">
+                            <label>Full Name *</label>
+                            <input type="text" id="name" name="name" placeholder="Your full name" required>
+                        </div>
+                        <div class="fg">
+                            <label>Email *</label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    <div class="f2row">
+                        <div class="fg">
+                            <label>Phone *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+254 718 770 846" required>
+                        </div>
+                        <div class="fg">
+                            <label>Service Type *</label>
+                            <select id="serviceType" name="serviceType" required onchange="handleServiceChange()">
+                                <option value="">Select Service</option>
+                                <option value="Restaurant Reservation">Restaurant Reservation</option>
+                                <option value="Lounge Reservation">Lounge Reservation</option>
+                                <option value="Catering Inquiry">Catering Inquiry</option>
+                                <option value="Event Planning">Event Planning</option>
+                                <option value="Conference Booking">Conference Booking</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="f2row">
+                        <div class="fg">
+                            <label>Preferred Date</label>
+                            <input type="date" id="date" name="date">
+                        </div>
+                        <div class="fg">
+                            <label>Number of Guests</label>
+                            <input type="number" id="guests" name="guests" placeholder="Number of guests" min="1">
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label>Message *</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Tell us more about your needs..." required></textarea>
+                    </div>
+
+                    <div class="email-routing-info" id="routingText" style="background: rgba(255,102,0,0.06); padding: 15px; border-radius: var(--radius); margin: 20px 0; font-size: 13px; border-left: 4px solid var(--org); color: #555; overflow-wrap: break-word; word-break: break-word;">
+                        Your message will be sent to our dedicated team for prompt handling.
+                    </div>
+                    
+                    <div class="email-routing-info" id="deptLinks" style="margin-top:8px;font-size:0.85rem;color:#777;text-align:center;">
+                        Contact departments directly: <a href="mailto:food@ehafrica.com?subject=Restaurant%20Enquiry%20-%20Express%20Hotel%20and%20Events&body=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20on%20Express%20Hotel%20and%20Events" style="color:var(--orange);text-decoration:underline;font-weight:600;">food@ehafrica.com</a> · <a href="mailto:lounge@ehafrica.com?subject=Lounge%20Enquiry%20-%20Express%20Hotel%20and%20Events&body=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20on%20Express%20Hotel%20and%20Events" style="color:#008040;text-decoration:underline;font-weight:600;">lounge@ehafrica.com</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top:20px; font-family: var(--sans); font-weight:800; text-transform:uppercase; letter-spacing:0.06em; padding: 15px;"><i class="fas fa-paper-plane"></i> Send Message</button>
+                </form>
+           </div>
+          </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <!-- Footer Tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 25px; border-bottom: 2px solid #333;">
+                <button class="footer-tab-btn" id="footer-tab-lounge" onclick="switchFooterTab('lounge')" style="flex: 1; padding: 12px 16px; background: var(--org); color: white; border: none; border-radius: 4px 4px 0 0; font-family: var(--sans); font-weight: 600; font-size: 12px; cursor: pointer; text-transform: uppercase;">🌿 Lounge</button>
+                <button class="footer-tab-btn" id="footer-tab-events" onclick="switchFooterTab('events')" style="flex: 1; padding: 12px 16px; background: transparent; color: #ccc; border: none; border-radius: 4px 4px 0 0; font-family: var(--sans); font-weight: 600; font-size: 12px; cursor: pointer; text-transform: uppercase;">🎉 Events</button>
+            </div>
+
+            <!-- Lounge Footer Content -->
+            <div id="footer-lounge" class="footer-content">
+                <div class="footer-column">
+                    <h3>Express Lounge</h3>
+                    <p>Premium lounge and bar services with authentic African hospitality.</p>
+                    <div class="social-links">
+                        <a href="https://web.facebook.com/profile.php?id=61583660757272&sk=photos" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/express_lounge_olkalou/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@express.lounge.ol" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/254745055794?text=Hello%20Express%20Hotel%20Lounge%20Team%2C%20I%20need%20assistance" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <a href="https://maps.app.goo.gl/ivDtgPqfwWgkw8na8" target="_blank" class="map-btn">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Express Hotel & Lounge</span>
+                    </a>
+                </div>
+                <div class="footer-column"><h3>Quick Links</h3><ul><li><a href="#home">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#restaurant">Restaurant</a></li><li><a href="#lounge">Lounge</a></li><li><a href="#services">Services</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li></ul></div>
+                <div class="footer-column"><h3>Contact Info</h3><ul><li><a href="tel:+254745055794"><i class="fas fa-phone"></i> +254 745 055 794</a></li><li><a href="mailto:lounge@ehafrica.com?subject=Lounge%20Enquiry%20-%20Express%20Hotel%20and%20Events&body=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20on%20Express%20Hotel%20and%20Events"><i class="fas fa-envelope"></i> lounge@ehafrica.com</a></li></ul></div>
+            </div>
+
+            <!-- Events Footer Content -->
+            <div id="footer-events" class="footer-content" style="display: none;">
+                <div class="footer-column">
+                    <h3>Express Events & Catering</h3>
+                    <p>Full event planning, catering, and celebration services with authentic African hospitality.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1DhZuvpF1W/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/express_events_and_catering" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@expresseventsandcatering" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/254796148200?text=Hello%20Express%20Hotel%20Events%20Team%2C%20I%20need%20assistance" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <a href="https://maps.app.goo.gl/ivDtgPqfwWgkw8na8" target="_blank" class="map-btn">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Express Hotel & Events</span>
+                    </a>
+                </div>
+                <div class="footer-column"><h3>Quick Links</h3><ul><li><a href="#home">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#restaurant">Restaurant</a></li><li><a href="#lounge">Lounge</a></li><li><a href="#services">Services</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li></ul></div>
+                <div class="footer-column"><h3>Contact Info</h3><ul><li><a href="tel:+254796148200"><i class="fas fa-phone"></i> +254 796 148 200</a></li><li><a href="mailto:worldclassexpresseventsandcate@gmail.com?subject=Events%20%26%20Catering%20Enquiry%20-%20Express%20Hotel%20and%20Events&body=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20on%20Express%20Hotel%20and%20Events"><i class="fas fa-envelope"></i> worldclassexpresseventsandcate@gmail.com</a></li></ul></div>
+            </div>
+
+            <div class="copyright"><p>© <span id="currentYear">2025</span> Express Hotel and Events. All rights reserved. | Proudly African</p><p>Karibu Africa! Welcome to African Hospitality!</p></div>
+        </div>
+    </footer>
+
+    <script>
+        // Switch footer tabs between Lounge and Events
+        function switchFooterTab(type) {
+            const loungeFooter = document.getElementById('footer-lounge');
+            const eventsFooter = document.getElementById('footer-events');
+            const loungeBtn = document.getElementById('footer-tab-lounge');
+            const eventsBtn = document.getElementById('footer-tab-events');
+
+            if (type === 'lounge') {
+                loungeFooter.style.display = 'grid';
+                eventsFooter.style.display = 'none';
+                loungeBtn.style.background = 'var(--org)';
+                loungeBtn.style.color = 'white';
+                eventsBtn.style.background = 'transparent';
+                eventsBtn.style.color = '#ccc';
+            } else {
+                loungeFooter.style.display = 'none';
+                eventsFooter.style.display = 'grid';
+                loungeBtn.style.background = 'transparent';
+                loungeBtn.style.color = '#ccc';
+                eventsBtn.style.background = 'var(--org)';
+                eventsBtn.style.color = 'white';
+            }
+        }
+        // Mobile menu toggle
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const nav = document.querySelector('.main-nav');
+        if(mobileBtn) {
+            mobileBtn.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                mobileBtn.querySelector('i').classList.toggle('fa-bars');
+                mobileBtn.querySelector('i').classList.toggle('fa-times');
+            });
+        }
+        // Back to top & Header Scroll trigger
+        const backBtn = document.getElementById('backToTop');
+        const headerEl = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 300) backBtn.classList.add('visible');
+            else backBtn.classList.remove('visible');
+
+            if(window.scrollY > 50) headerEl.classList.add('scrolled');
+            else headerEl.classList.remove('scrolled');
+        });
+        backBtn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+        // Slideshow function
+        function initSlideshow(slideshowId, dotsId, prevId, nextId) {
+            const container = document.getElementById(slideshowId);
+            if(!container) return;
+            const slides = container.querySelectorAll('.slide');
+            const dotsContainer = document.getElementById(dotsId);
+            const prevBtn = document.getElementById(prevId);
+            const nextBtn = document.getElementById(nextId);
+            let current = 0;
+            function showSlide(index) {
+                slides.forEach((s,i)=> {
+                    s.classList.toggle('active', i===index);
+                    if(dotsContainer && dotsContainer.children[i]) dotsContainer.children[i].classList.toggle('active', i===index);
+                });
+                current = index;
+            }
+            function next() { showSlide((current+1)%slides.length); }
+            function prev() { showSlide((current-1+slides.length)%slides.length); }
+            if(dotsContainer) {
+                slides.forEach((_,i)=>{
+                    const dot = document.createElement('div');
+                    dot.className = 'dot' + (i===0 ? ' active' : '');
+                    dot.addEventListener('click',()=>showSlide(i));
+                    dotsContainer.appendChild(dot);
+                });
+            }
+            if(prevBtn) prevBtn.addEventListener('click',prev);
+            if(nextBtn) nextBtn.addEventListener('click',next);
+            showSlide(0);
+            let interval = setInterval(next, 4000);
+            container.addEventListener('mouseenter',()=>clearInterval(interval));
+            container.addEventListener('mouseleave',()=>{ interval = setInterval(next,4000); });
+        }
+        initSlideshow('restaurantSlideshow','restaurantDots','restaurantPrev','restaurantNext');
+        initSlideshow('loungeSlideshow','loungeDots','loungePrev','loungeNext');
+        // Gallery filtering and lightbox
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        filterBtns.forEach(btn=>{
+            btn.addEventListener('click',()=>{
+                filterBtns.forEach(b=>b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                galleryItems.forEach(item=>{
+                    if(filter==='all' || item.dataset.category===filter) item.style.display='block';
+                    else item.style.display='none';
+                });
+            });
+        });
+        // Lightbox
+        const lightbox = document.getElementById('lightboxModal');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const closeLightbox = document.querySelector('.close-lightbox');
+        const prevLightbox = document.getElementById('prevBtn');
+        const nextLightbox = document.getElementById('nextBtn');
+        let currentGalleryIndex = 0;
+        const allVisibleItems = () => Array.from(galleryItems).filter(item=>item.style.display!=='none');
+        galleryItems.forEach((item,idx)=>{
+            item.addEventListener('click',()=>{
+                const img = item.querySelector('img').src;
+                const title = item.querySelector('h4')?.innerText || 'Gallery';
+                const desc = item.querySelector('p')?.innerText || '';
+                lightboxImg.src = img;
+                lightboxCaption.innerText = `${title} - ${desc}`;
+                lightbox.style.display = 'flex';
+                currentGalleryIndex = idx;
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        function updateLightbox() {
+            const visible = allVisibleItems();
+            if(visible.length===0) return;
+            const item = visible[currentGalleryIndex % visible.length];
+            if(!item) return;
+            const img = item.querySelector('img').src;
+            const title = item.querySelector('h4')?.innerText || '';
+            const desc = item.querySelector('p')?.innerText || '';
+            lightboxImg.src = img;
+            lightboxCaption.innerText = `${title} - ${desc}`;
+        }
+        function showLightboxImage(direction) {
+            const visible = allVisibleItems();
+            if(visible.length===0) return;
+            let newIndex = currentGalleryIndex + direction;
+            if(newIndex < 0) newIndex = visible.length-1;
+            if(newIndex >= visible.length) newIndex = 0;
+            currentGalleryIndex = newIndex;
+            updateLightbox();
+        }
+        closeLightbox.addEventListener('click',()=>{ lightbox.style.display='none'; document.body.style.overflow='auto'; });
+        prevLightbox.addEventListener('click',()=>showLightboxImage(-1));
+        nextLightbox.addEventListener('click',()=>showLightboxImage(1));
+        document.addEventListener('keydown',e=>{
+            if(lightbox.style.display==='flex'){
+                if(e.key==='Escape') { lightbox.style.display='none'; document.body.style.overflow='auto'; }
+                if(e.key==='ArrowLeft') showLightboxImage(-1);
+                if(e.key==='ArrowRight') showLightboxImage(1);
+            }
+        });
+        // Current year
+        document.getElementById('currentYear').innerText = new Date().getFullYear();
+        // FAQ split tabs function
+        function switchFAQ(type) {
+            const fl = document.getElementById('faq-lounge');
+            const fe = document.getElementById('faq-events');
+            const bl = document.getElementById('fst-lounge');
+            const be = document.getElementById('fst-events');
+            if(type === 'lounge') {
+                fl.style.display = 'grid';
+                fe.style.display = 'none';
+                bl.className = 'fst fst-active-l';
+                be.className = 'fst';
+            } else {
+                fe.style.display = 'grid';
+                fl.style.display = 'none';
+                be.className = 'fst fst-active-e';
+                bl.className = 'fst';
+            }
+        }
+
+        // Contact department select and scroll helper
+        function setContactFormSelect(serviceName) {
+            const selectEl = document.getElementById('serviceType');
+            if(selectEl) {
+                selectEl.value = serviceName;
+                handleServiceChange();
+            }
+            const formEl = document.getElementById('contactForm');
+            if(formEl) {
+                formEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Dynamic Form Action router & Text Updater
+        function handleServiceChange() {
+            const form = document.getElementById('contactForm');
+            const selectEl = document.getElementById('serviceType');
+            const routingText = document.getElementById('routingText');
+            if(!form || !selectEl) return;
+
+            const service = selectEl.value;
+            let email = 'worldclassexpresseventsandcate@gmail.com';
+            let deptText = 'Your message will be routed directly to our Express Events & Catering department at <a href="mailto:worldclassexpresseventsandcate@gmail.com?subject=Events%20%26%20Catering%20Enquiry%20-%20Express%20Hotel%20and%20Events&body=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20on%20Express%20Hotel%20and%20Events" style="word-break: break-all; color: var(--orange-dark); font-weight: 700; text-decoration: underline;">worldclassexpresseventsandcate@gmail.com</a>.';
+
+            if (service === 'Restaurant Reservation') {
+                email = 'food@ehafrica.com';
+                deptText = 'Your message will be routed directly to our Restaurant department at <a href="mailto:food@ehafrica.com?subject=Restaurant%20Enquiry%20-%20Express%20Hotel%20and%20Events&body=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20on%20Express%20Hotel%20and%20Events" style="word-break: break-all; color: var(--orange-dark); font-weight: 700; text-decoration: underline;">food@ehafrica.com</a> for your table booking or menu inquiry.';
+            } else if (service === 'Lounge Reservation') {
+                email = 'lounge@ehafrica.com';
+                deptText = 'Your message will be routed directly to our Premium Lounge & Bar department at <a href="mailto:lounge@ehafrica.com?subject=Lounge%20Enquiry%20-%20Express%20Hotel%20and%20Events&body=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20on%20Express%20Hotel%20and%20Events" style="word-break: break-all; color: var(--orange-dark); font-weight: 700; text-decoration: underline;">lounge@ehafrica.com</a> for table bookings and VIP reservations.';
+            } else if (service === 'Catering Inquiry' || service === 'Event Planning' || service === 'Conference Booking') {
+                email = 'worldclassexpresseventsandcate@gmail.com';
+                deptText = 'Your message will be routed directly to our Express Events & Catering department at <a href="mailto:worldclassexpresseventsandcate@gmail.com?subject=Events%20%26%20Catering%20Enquiry%20-%20Express%20Hotel%20and%20Events&body=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20on%20Express%20Hotel%20and%20Events" style="word-break: break-all; color: var(--orange-dark); font-weight: 700; text-decoration: underline;">worldclassexpresseventsandcate@gmail.com</a>.';
+            }
+
+            form.action = 'https://formsubmit.co/' + email;
+            if(routingText) {
+                routingText.innerHTML = deptText;
+            }
+        }
+
+        // Form success flow
+        (function(){
+            const nextField = document.getElementById('_nextField');
+            const form = document.getElementById('contactForm');
+            const sending = document.getElementById('sendingState');
+            const success = document.getElementById('formSuccess');
+            if(nextField) {
+                if (window.location.origin && window.location.origin !== 'null') {
+                    const url = window.location.origin + window.location.pathname + '?sent=1#contact';
+                    nextField.value = url;
+                } else {
+                    nextField.value = ''; // fallback for file:// protocol
+                }
+            }
+            const params = new URLSearchParams(window.location.search);
+            if(params.get('sent') === '1'){
+                if(success) { 
+                    success.style.display = 'block'; 
+                    success.scrollIntoView({behavior:'smooth', block:'center'}); 
+                }
+                history.replaceState(null, '', window.location.pathname + window.location.hash);
+            }
+            if(form){
+                // Initial check to sync routing text
+                handleServiceChange();
+                
+                form.addEventListener('submit', function(){
+                    handleServiceChange();
+                    if(sending) sending.style.display = 'block';
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    if(submitBtn) submitBtn.disabled = true;
+                });
+            }
+        })();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+            anchor.addEventListener('click',function(e){
+                const href = this.getAttribute('href');
+                if(href==='#') return;
+                const target = document.querySelector(href);
+                if(target){
+                    e.preventDefault();
+                    target.scrollIntoView({behavior:'smooth'});
+                    if(nav.classList.contains('active')) nav.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
